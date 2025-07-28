@@ -1,6 +1,6 @@
 mtcnn
 opencv-python-headless
-tensorflow
+tensorflow-cpu==2.12.0
 streamlit
 pillow
 pandas
