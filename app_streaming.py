@@ -2,7 +2,9 @@
 import json
 import cv2
 import numpy as np
-import mediapipe as mp
+from mtcnn import MTCNN
+detector = MTCNN()
+
 import tensorflow as tf
 import streamlit as st
 
