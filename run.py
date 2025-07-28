@@ -3,6 +3,8 @@ from datetime import datetime
 from PIL import Image
 from app_streaming import run_emotion_analysis
 import streamlit.components.v1 as components
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
+import av
 
 # ——— Page config & title ———
 st.set_page_config(layout='wide', page_title='ethicapp')
@@ -80,45 +82,47 @@ elif page == 'Teachable Machine':
 
 
 elif page == 'Emotion Analysis':
-    # 먼저 오른쪽에 사용법을 보여줍니다.
-    with right_col:
-        st.subheader('How to use')
-        st.markdown(
-            '''
-- 웹캠을 통해 실시간으로 얼굴을 감지하고 감정을 예측합니다.  
-- 브라우저에서 카메라 권한을 허용해 주세요.  
-- 여러 가지 표정으로 테스트해 보세요.
-            '''
-        )
+    st.subheader("Real‑Time Emotion Analysis")
 
-     # 왼쪽: 시작/중단 버튼 및 분석, 피드백 폼
-    with left_col:
-        btn1, btn2 = st.columns(2)
-        if btn1.button('Start Emotion Analysis'):
-            st.session_state['emotion_running'] = True
-        if btn2.button('Stop Emotion Analysis'):
-            st.session_state['emotion_running'] = False
+    # 1) 트랜스포머 클래스 정의
+    class EmotionTransformer(VideoTransformerBase):
+        def __init__(self):
+            self.label_map, self.model = load_emotion_model()
+            self.detector = load_face_detector()
 
-        # 감정 분석 실행 또는 정지
-        if st.session_state.get('emotion_running'):
-            run_emotion_analysis()
+        def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
+            img = frame.to_ndarray(format="bgr24")
+            rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            detections = self.detector.detect_faces(rgb)
+            if detections:
+                x, y, w, h = detections[0]['box']
+                x, y = max(0, x), max(0, y)
+                face = rgb[y:y+h, x:x+w]
+                if face.size and w >= 20 and h >= 20:
+                    gray = cv2.cvtColor(face, cv2.COLOR_RGB2GRAY)
+                    resized = cv2.resize(gray, (48, 48))
+                    x_input = np.expand_dims(resized.astype("float32")/255.0, axis=(0, -1))
+                    proba = self.model.predict(x_input)[0]
+                    idx = int(np.argmax(proba))
+                    label = self.label_map[idx]
+                    status = (
+                        "Positive" if label=="Happy"
+                        else "Negative" if label in ["Sad","Angry","Disgust","Fear"]
+                        else "Neutral"
+                    )
+                    cv2.putText(img, f"{status} ({label})", (x, y-10),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 2)
+                    cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
+            return av.VideoFrame.from_ndarray(img, format="bgr24")
 
-        st.subheader('학생 피드백 기록')
-        student_name = st.text_input('학번')
-        incorrect = st.text_area('잘못 인식된 감정', height=100)
-        reason = st.text_area('이유', height=100)
-        if st.button('Submit Feedback'):
-            if student_name.strip() and incorrect.strip() and reason.strip():
-                ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                entry = f'[{ts}] Student: {student_name} | Incorrect Analysis: {incorrect} | Reason: {reason}\n'
-                try:
-                    with open('analyze.txt', 'a', encoding='utf-8') as f:
-                        f.write(entry)
-                    st.success('Feedback submitted!')
-                except Exception as e:
-                    st.error(f'Error saving feedback: {e}')
-            else:
-                st.warning('모든 필드를 입력한 후 제출해주세요.')
+    # 2) 스트리밍 위젯 호출
+    webrtc_streamer(
+        key="emotion",
+        mode="SENDRECV",
+        video_transformer_factory=EmotionTransformer,
+        media_stream_constraints={"video": True, "audio": False},
+    )
+
 
 
 
