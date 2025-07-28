@@ -21,7 +21,7 @@ left_col, right_col = st.columns([4, 1])
 if page == 'Home':
     with left_col:
         st.subheader('Content')
-        st.video('https://www.youtube.com/watch?v=lkT6qg55kpE') #https://youtu.be/CShXWACuGp8?si=ANvHKLLaTQq6jU00
+        st.video('https://youtu.be/5GN2dIu5fg4') #https://youtu.be/CShXWACuGp8?si=ANvHKLLaTQq6jU00    https://www.youtube.com/watch?v=lkT6qg55kpE
 
 
         # 폰트 크기를 키워서 안내 문구 출력
