@@ -64,7 +64,7 @@ def run_emotion_analysis():
     proba_dict = {label_map[i]: float(proba[i]) for i in range(len(proba))}
 
     # 결과 표시
-    st.image(frame, caption="Captured Image", use_column_width=True)
+    st.image(frame, caption="Captured Image", use_container_width=True)
     st.write("**Prediction Probabilities:**", proba_dict)
 
     idx = int(np.argmax(proba))
