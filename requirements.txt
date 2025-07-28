@@ -1,6 +1,6 @@
-streamlit
+mtcnn
 opencv-python-headless
-mediapipe==0.10.0
 tensorflow
+streamlit
 pillow
 pandas
