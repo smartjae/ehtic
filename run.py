@@ -135,27 +135,7 @@ elif page == 'Emotion Analysis':
 
 
 
-    # 왼쪽에서 감정 분석과 피드백 폼을 렌더링합니다.
-    # with left_col:
-    #     run_emotion_analysis()
-    #     # 학생 피드백 기록 폼
-    #     st.subheader('학생 피드백 기록')
-    #     student_name = st.text_input('Student')
-    #     incorrect = st.text_area('Incorrect Analysis', height=100)
-    #     reason = st.text_area('Reasons for Missing', height=100)
-    #     if st.button('Submit Feedback'):
-    #         if student_name.strip() and incorrect.strip() and reason.strip():
-    #             ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    #             entry = f'[{ts}] Student: {student_name} | Incorrect Analysis: {incorrect} | Reason: {reason}\n'
-    #             try:
-    #                 with open('analyze.txt', 'a', encoding='utf-8') as f:
-    #                     f.write(entry)
-    #                 st.success('Feedback submitted!')
-    #             except Exception as e:
-    #                 st.error(f'Error saving feedback: {e}')
-    #         else:
-    #             st.warning('모든 필드를 입력한 후 제출해주세요.')
-
+   
 
 
 elif page == 'Student Data':
@@ -233,17 +213,6 @@ elif page == 'How Sentiment Analysis AI Works':
         '''
     )
 
-    with left_col:
-        st.subheader('Tips & Help')
-        st.markdown(
-            '''
-- 💡 **Tip 1:** 윤리적 딜레마가 발생할 수 있는 상황을 미리 상상해 보세요.  
-- 💡 **Tip 2:** AI가 내린 판단을 그대로 믿기보다, 항상 비판적으로 검토하세요.  
-- ❓ **Help:** 문제가 있을 땐 사이드바의 ‘문의하기’ 버튼을 눌러주세요.
-            '''
-        )
-    with right_col:
-        st.write('')  # 비어 있는 영역
 
 
 
