@@ -12,7 +12,7 @@ st.title('감정을 읽는 기계')
 st.sidebar.subheader('Menu …')
 page = st.sidebar.radio(
     '',
-    ['Home', 'Teachable Machine','Emotion Analysis', 'Student Data','Help']
+    ['Home', 'Teachable Machine','Colab','Emotion Analysis', 'Student Data','Help']
 )
 
 # ——— Main layout: two columns (4:1) ———
@@ -77,6 +77,20 @@ elif page == 'Teachable Machine':
         """
     )
     st.write('Teachable Machine 페이지로 이동 중입니다...')
+
+
+
+elif page == 'Colab':
+    # 외부 Teachable Machine 페이지로 이동
+    components.html(
+        """
+        <script>
+            window.open('https://colab.google/', '_blank')
+        </script>
+        """
+    )
+    st.write('Colab 페이지로 이동 중입니다...')
+
 
 
 elif page == 'Emotion Analysis':
