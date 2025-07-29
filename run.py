@@ -12,7 +12,7 @@ st.title('감정을 읽는 기계')
 st.sidebar.subheader('Menu …')
 page = st.sidebar.radio(
     '',
-    ['Home', 'Teachable Machine','Colab','Emotion Analysis', 'Student Data','How Sentiment Analysis AI Works']
+    ['Home', 'Teachable Machine','Colab','Emotion Analysis','How Sentiment Analysis AI Works', 'Student Data']
 )
 
 # ——— Main layout: two columns (4:1) ———
