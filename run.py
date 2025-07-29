@@ -12,7 +12,7 @@ st.title('감정을 읽는 기계')
 st.sidebar.subheader('Menu …')
 page = st.sidebar.radio(
     '',
-    ['Home', 'Teachable Machine','Colab','Emotion Analysis', 'Student Data','Help']
+    ['Home', 'Teachable Machine','Colab','Emotion Analysis', 'Student Data','How Sentiment Analysis AI Works']
 )
 
 # ——— Main layout: two columns (4:1) ———
@@ -43,19 +43,6 @@ if page == 'Home':
                 st.warning('생각을 입력한 후 제출해주세요.')
 
 
-        # thoughts = st.text_area('기계가 감정을 읽을 수 있을까?', height=150)
-        # if st.button('제출'):
-        #     if thoughts.strip():
-        #         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        #         entry = f'[{timestamp}] {thoughts}\n'
-        #         try:
-        #             with open('data.txt', 'a', encoding='utf-8') as f:
-        #                 f.write(entry)
-        #             st.success('생각이 성공적으로 제출되었습니다!')
-        #         except Exception as e:
-        #             st.error(f'제출 중 오류 발생: {e}')
-        #     else:
-        #         st.warning('생각을 입력한 후 제출해주세요.')
 
     with right_col:
         st.subheader('Tips & Help')
@@ -146,28 +133,6 @@ elif page == 'Emotion Analysis':
 
 
 
-    # 왼쪽에서 분석 및 피드백 폼 표시
-    # with left_col:
-    #     # 실시간 감정 분석 시작 버튼
-    #     if st.button('Start Emotion Analysis'):
-    #         run_emotion_analysis()
-    #     st.subheader('학생 피드백 기록')
-    #     student_name = st.text_input('Student')
-    #     incorrect = st.text_area('Incorrect Analysis', height=100)
-    #     reason = st.text_area('Reasons for Missing', height=100)
-    #     if st.button('Submit Feedback'):
-    #         if student_name.strip() and incorrect.strip() and reason.strip():
-    #             ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    #             entry = f'[{ts}] Student: {student_name} | Incorrect Analysis: {incorrect} | Reason: {reason}\n'
-    #             try:
-    #                 with open('analyze.txt', 'a', encoding='utf-8') as f:
-    #                     f.write(entry)
-    #                 st.success('Feedback submitted!')
-    #             except Exception as e:
-    #                 st.error(f'Error saving feedback: {e}')
-    #         else:
-    #             st.warning('모든 필드를 입력한 후 제출해주세요.')
-
 
 
     # 왼쪽에서 감정 분석과 피드백 폼을 렌더링합니다.
@@ -241,21 +206,48 @@ elif page == 'Student Data':
 
 
 
+elif page == 'How Sentiment Analysis AI Works':
+    st.markdown('### 🤖 감정 분석 AI의 작동 원리')
+    st.markdown(
+        '''
+1. **입력 데이터 수집**  
+   - 얼굴 이미지나 영상 스트림이 입력으로 들어옵니다.
 
-# elif page == '학생 데이터':
-#     with left_col:
-#         st.subheader('저장된 학생 데이터')
-#         try:
-#             with open('data.txt', 'r', encoding='utf-8') as f:
-#                 content = f.read()
-#             st.text_area('', content, height=300)
-#         except FileNotFoundError:
-#             st.error('data.txt 파일이 없습니다.')
-#         except Exception as e:
-#             st.error(f'데이터 불러오기 중 오류 발생: {e}')
-#     #(코드 개선 요구):학생이 작성한 analyze.txt저장된 데이터가 "student_name","incorrect","reason"을 컬럼명을 갖는 표로 출력된다. 표의 제목은 "감정 분석 결과"이다.
-#     with right_col:
-#         st.write('')  # 비어 있는 영역
+2. **얼굴 감지 (Face Detection)**  
+   - 이미지에서 얼굴 영역을 찾아냅니다. (예: MediaPipe 사용)
+
+3. **얼굴 특징 추출 (Feature Extraction)**  
+   - 눈, 코, 입 등 3D 특징점을 추출하여 표정 변화를 인식합니다.
+
+4. **데이터 전처리 (Preprocessing)**  
+   - 이미지 크기 조정, 흑백 변환, 정규화를 통해 AI가 학습하기 좋은 형태로 만듭니다.
+
+5. **감정 분류 모델 입력 (Model Inference)**  
+   - CNN 기반 모델에 이미지를 입력하고, 감정 확률을 예측합니다.
+
+6. **감정 선택 (Prediction Result)**  
+   - 가장 높은 확률의 감정을 최종 결과로 출력합니다.
+
+7. **시각화 및 출력**  
+   - 예측된 감정을 텍스트, 이모지, 차트 등으로 시각화합니다.
+        '''
+    )
+
+    with left_col:
+        st.subheader('Tips & Help')
+        st.markdown(
+            '''
+- 💡 **Tip 1:** 윤리적 딜레마가 발생할 수 있는 상황을 미리 상상해 보세요.  
+- 💡 **Tip 2:** AI가 내린 판단을 그대로 믿기보다, 항상 비판적으로 검토하세요.  
+- ❓ **Help:** 문제가 있을 땐 사이드바의 ‘문의하기’ 버튼을 눌러주세요.
+            '''
+        )
+    with right_col:
+        st.write('')  # 비어 있는 영역
+
+
+
+
 
 elif page == 'Help':
     with left_col:
