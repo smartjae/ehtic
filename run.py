@@ -187,6 +187,7 @@ elif page == 'Student Data':
 
 
 elif page == 'How Sentiment Analysis AI Works':
+   
     st.markdown('### 🤖 감정 분석 AI의 작동 원리')
     st.markdown(
         '''
