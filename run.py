@@ -15,7 +15,7 @@ st.title('감정을 읽는 기계')
 
 # 1) 사이드바 CSS 조정 (간격 줄이기)
 st.sidebar.markdown(
-    """
+    
     <style>
     [data-testid="stSidebar"] h2 {
         margin-bottom: 4px;
@@ -24,7 +24,7 @@ st.sidebar.markdown(
         margin-top: 0px;
     }
     </style>
-    """,
+    ,
     unsafe_allow_html=True
 )
 
