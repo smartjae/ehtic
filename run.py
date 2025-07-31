@@ -27,6 +27,24 @@ st.sidebar.markdown(
     """,
     unsafe_allow_html=True
 )
+# 사이드바 CSS 조정: subheader와 라디오 간격 줄이기
+st.sidebar.markdown(
+    """
+    <style>
+    /* 사이드바 내부의 h2 (subheader) 아래 여백을 4px로 */
+    [data-testid="stSidebar"] h2 {
+        margin-bottom: 4px;
+    }
+    /* 라디오 버튼 컨테이너 위 여백을 0으로 */
+    [data-testid="stSidebar"] .stRadio {
+        margin-top: 0px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # ——— Sidebar navigation menu ———
 st.sidebar.subheader('MENU')
 page = st.sidebar.radio(
