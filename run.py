@@ -12,7 +12,7 @@ st.title('감정을 읽는 기계')
 st.sidebar.subheader('Menu …')
 page = st.sidebar.radio(
     '',
-    ['Home','감정 분석 AI','감정 분석 AI의 작동원리', '학생 응답']
+    ['Home','감정 분석 AI','감정 분석 AI의 작동원리', '학생응답 결과']
 )
 
 # ——— Main layout: two columns (4:1) ———
@@ -37,7 +37,85 @@ if page == 'Home':
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 entry = f'[{timestamp}] {thoughts}\n'
                 with open('data.txt', 'a', encoding='utf-8') as f:
-                    f.write(some_data)
+                    f.write(entry)
+                st.success('생각이 성공적으로 제출되었습니다!')
+            else:
+                st.warning('생각을 입력한 후 제출해주세요.')
+
+
+
+    with right_col:
+        st.subheader('Tips & Help')
+        st.markdown(
+            '''
+- 💡 **Tip 1:** 윤리적 딜레마가 발생할 수 있는 상황을 미리 상상해 보세요.  
+- 💡 **Tip 2:** AI가 내린 판단을 그대로 믿기보다, 항상 비판적으로 검토하세요.  
+            '''
+        )
+
+
+
+
+
+elif page == '감정 분석 AI':
+    # 먼저 오른쪽에 사용법을 보여줍니다.
+    with right_col:
+        st.subheader('How to use')
+        st.markdown(
+            '''
+- 웹캠을 통해 실시간으로 얼굴을 감지하고 감정을 예측합니다.  
+- 브라우저에서 카메라 권한을 허용해 주세요.  
+- 여러 가지 표정으로 테스트해 보세요.
+            '''
+        )
+
+     # 왼쪽: 시작/중단 버튼 및 분석, 피드백 폼
+    with left_col:
+        btn1, btn2 = st.columns(2)
+        if btn1.button('Start Emotion Analysis'):
+            st.session_state['emotion_running'] = True
+        if btn2.button('Stop Emotion Analysis'):
+            st.session_state['emotion_running'] = False
+
+        # 감정 분석 실행 또는 정지
+        if st.session_state.get('emotion_running'):
+            run_emotion_analysis()
+
+        st.subheader('학생 피드백 기록')
+        student_name = st.text_input('학번')
+        incorrect = st.text_area('잘못 인식된 감정', height=100)
+        reason = st.text_area('이유', height=100)
+        if st.button('Submit Feedback'):
+            if student_name.strip() and incorrect.strip() and reason.strip():
+                ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                entry = f'[{ts}] Student: {student_name} | Incorrect Analysis: {incorrect} | Reason: {reason}\n'
+                try:
+                    with open('analyze.txt', 'a', encoding='utf-8') as f:
+                        f.write(entry)
+                    st.success('Feedback submitted!')
+                except Exception as e:
+                    st.error(f'Error saving feedback: {e}')
+            else:
+                st.warning('모든 필드를 입력한 후 제출해주세요.')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+elif page == '학생응답 결과':
     with left_col:
         st.subheader('Stored Student Data')
         # data.txt 내용 표시
@@ -139,14 +217,5 @@ elif page == '감정 분석 AI의 작동원리':
 
 
 
-elif page == 'Help':
-    with left_col:
-        st.subheader('Tips & Help')
-        st.markdown(
-            '''
-- 💡 **Tip 1:** 윤리적 딜레마가 발생할 수 있는 상황을 미리 상상해 보세요.  
-- 💡 **Tip 2:** AI가 내린 판단을 그대로 믿기보다, 항상 비판적으로 검토하세요.  
-            '''
-        )
-    with right_col:
-        st.write('')  # 비어 있는 영역
+
+
