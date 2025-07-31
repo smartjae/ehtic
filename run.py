@@ -3,6 +3,8 @@ from datetime import datetime
 from PIL import Image
 from app_streaming import run_emotion_analysis
 import streamlit.components.v1 as components
+import pandas as pd
+import re
 
 # ——— Page config & title ———
 st.set_page_config(layout='wide', page_title='ethicapp')
