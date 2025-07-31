@@ -10,8 +10,6 @@ import re
 st.set_page_config(layout='wide', page_title='ethicapp')
 st.title('감정을 읽는 기계')
 
-# ——— Sidebar navigation menu ———
-st.sidebar.subheader('MENU')
 
 # 학습 목표 박스 추가
 st.sidebar.markdown(
@@ -29,6 +27,8 @@ st.sidebar.markdown(
     """,
     unsafe_allow_html=True
 )
+# ——— Sidebar navigation menu ———
+st.sidebar.subheader('MENU')
 
 page = st.sidebar.radio(
     '',
