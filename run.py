@@ -10,22 +10,6 @@ import re
 st.set_page_config(layout='wide', page_title='ethicapp')
 st.title('감정을 읽는 기계')
 
-
-# ——— Sidebar CSS (여백 최소화) ———
-st.sidebar.markdown(
-    """
-    <style>
-    /* 사이드바 내부 모든 h2 기본 마진 제거(필요 시 조정) */
-    [data-testid="stSidebar"] h2 {
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 1.1em;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # ——— 학습 목표 박스 (최상단) ———
 st.sidebar.markdown(
     """
