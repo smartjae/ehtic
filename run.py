@@ -150,29 +150,30 @@ elif page == '감정 분석 AI':
 
 elif page == '학생응답 결과':
     with left_col:
-        st.subheader('학생 응답 결과')
-
-        # data.txt 파싱해서 표로 보여주기
+        # 1) 학생 응답 테이블
+        st.subheader('📝 학생 응답 결과 테이블')
         try:
+            import pandas as pd, re
             rows = []
             with open('data.txt', 'r', encoding='utf-8') as f:
                 for line in f:
+                    # [timestamp] answer1 | answer2
                     m = re.match(r'\[(.*?)\]\s*(.*?)\s*\|\s*(.*)', line)
                     if m:
                         rows.append({
                             '제출 시각': m.group(1),
-                            '기계가 사람의 감정을 인식할 수 있다면, 어떤 상황에서 도움이 될 수 있을까요?': m.group(2),
-                            '기계가 감정을 읽을 수 있다고 생각하나요?': m.group(3)
+                            '1️⃣ 기계가 사람의 감정을 인식할 수 있다면, 어떤 상황에서 도움이 될 수 있을까요?': m.group(2),
+                            '2️⃣ 기계가 감정을 읽을 수 있다고 생각하나요?': m.group(3)
                         })
             if rows:
                 df = pd.DataFrame(rows)
                 st.table(df)
             else:
-                st.info('아직 제출된 응답이 없습니다.')
+                st.info('아직 제출된 학생 응답이 없습니다.')
         except FileNotFoundError:
             st.error('data.txt 파일을 찾을 수 없습니다.')
         except Exception as e:
-            st.error(f'응답 결과를 불러오는 중 오류가 발생했습니다: {e}')
+            st.error(f'응답 데이터를 불러오는 중 오류가 발생했습니다: {e}')
 
         # 기존 analyze.txt 테이블 표시 (필요 시 그대로 유지)
         st.subheader('Emotional Analysis Results')
