@@ -161,8 +161,8 @@ elif page == '학생응답 결과':
                     if m:
                         rows.append({
                             '제출 시각': m.group(1),
-                            '질문 1 응답': m.group(2),
-                            '질문 2 응답': m.group(3)
+                            '기계가 사람의 감정을 인식할 수 있다면, 어떤 상황에서 도움이 될 수 있을까요?': m.group(2),
+                            '기계가 감정을 읽을 수 있다고 생각하나요?': m.group(3)
                         })
             if rows:
                 df = pd.DataFrame(rows)
