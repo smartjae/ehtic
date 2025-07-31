@@ -187,10 +187,11 @@ elif page == 'Student Data':
 
 
 elif page == 'How Sentiment Analysis AI Works':
-   
-    st.markdown('### 🤖 감정 분석 AI의 작동 원리')
-    st.markdown(
-        '''
+    # 왼쪽 컬럼: 설명
+    with left_col:
+        st.markdown('### 🤖 감정 분석 AI의 작동 원리')
+        st.markdown(
+            '''
 1. **입력 데이터 수집**  
    - 얼굴 이미지나 영상 스트림이 입력으로 들어옵니다.
 
@@ -211,9 +212,29 @@ elif page == 'How Sentiment Analysis AI Works':
 
 7. **시각화 및 출력**  
    - 예측된 감정을 텍스트, 이모지, 차트 등으로 시각화합니다.
-        '''
-    )
+            '''
+        )
 
+    # 오른쪽 컬럼: 버튼
+    with right_col:
+        if st.button('➡️ Teachable Machine'):
+            components.html(
+                """
+                <script>
+                    window.open('https://teachablemachine.withgoogle.com/train', '_blank')
+                </script>
+                """,
+                height=0  # 보이지 않게 삽입
+            )
+        if st.button('➡️ Colab'):
+            components.html(
+                """
+                <script>
+                    window.open('https://colab.google/', '_blank')
+                </script>
+                """,
+                height=0
+            )
 
 
 
