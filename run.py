@@ -20,7 +20,7 @@ st.sidebar.markdown(
 
 # ——— 페이지 선택 라디오 버튼 ———
 page = st.sidebar.radio(
-    'MENU',
+    '',
     ['Home', '감정 분석 AI', '감정 분석 AI의 작동원리', '학생응답 결과']
 )
 
