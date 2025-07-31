@@ -118,36 +118,49 @@ elif page == '감정 분석 AI':
 
 elif page == '학생응답 결과':
     with left_col:
-        st.subheader('Stored Student Data')
-        # data.txt 내용 표시
-        try:
-            with open('data.txt', 'r', encoding='utf-8') as f:
-                content = f.read()
-            st.text_area('', content, height=300)
-        except FileNotFoundError:
-            st.error('data.txt 파일이 없습니다.')
-        except Exception as e:
-            st.error(f'data.txt 불러오기 중 오류 발생: {e}')
+        st.subheader('학생 응답 결과')
 
-        # analyze.txt 데이터를 테이블로 표시
-        st.subheader('Emotional Analysis Results')
+        # data.txt 파싱해서 표로 보여주기
         try:
-            import pandas as pd
             rows = []
-            with open('analyze.txt', 'r', encoding='utf-8') as f:
+            with open('data.txt', 'r', encoding='utf-8') as f:
                 for line in f:
-                    # Expected format: [timestamp] Student: name | Incorrect Analysis: incorrect | Reason: reason
-                    try:
-                        parts = line.strip().split('|')
-                        name = parts[0].split('Student:')[1].strip()
-                        incorrect = parts[1].split('Incorrect Analysis:')[1].strip()
-                        reason = parts[2].split('Reason:')[1].strip()
-                        rows.append({'학번': name, '잘못 인식된 감정': incorrect, '이유': reason})
-                    except Exception:
-                        continue
+                    m = re.match(r'\[(.*?)\]\s*(.*?)\s*\|\s*(.*)', line)
+                    if m:
+                        rows.append({
+                            '제출 시각': m.group(1),
+                            '질문 1 응답': m.group(2),
+                            '질문 2 응답': m.group(3)
+                        })
             if rows:
                 df = pd.DataFrame(rows)
                 st.table(df)
+            else:
+                st.info('아직 제출된 응답이 없습니다.')
+        except FileNotFoundError:
+            st.error('data.txt 파일을 찾을 수 없습니다.')
+        except Exception as e:
+            st.error(f'응답 결과를 불러오는 중 오류가 발생했습니다: {e}')
+
+        # 기존 analyze.txt 테이블 표시 (필요 시 그대로 유지)
+        st.subheader('Emotional Analysis Results')
+        try:
+            analysis_rows = []
+            with open('analyze.txt', 'r', encoding='utf-8') as f:
+                for line in f:
+                    parts = line.strip().split('|')
+                    if len(parts) >= 3:
+                        name = parts[0].split('Student:')[-1].strip()
+                        incorrect = parts[1].split('Incorrect Analysis:')[-1].strip()
+                        reason = parts[2].split('Reason:')[-1].strip()
+                        analysis_rows.append({
+                            '학번': name,
+                            '잘못 인식된 감정': incorrect,
+                            '이유': reason
+                        })
+            if analysis_rows:
+                df2 = pd.DataFrame(analysis_rows)
+                st.table(df2)
             else:
                 st.info('analyze.txt에 기록된 데이터가 없습니다.')
         except FileNotFoundError:
@@ -156,7 +169,7 @@ elif page == '학생응답 결과':
             st.error(f'analyze.txt 불러오기 중 오류 발생: {e}')
 
     with right_col:
-        st.write('')
+        st.write('')  # 필요에 따라 도움말 추가
 
 
 
