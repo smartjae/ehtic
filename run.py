@@ -211,7 +211,12 @@ elif page == '감정 분석 AI의 작동원리':
     # 오른쪽 컬럼: 버튼
     
     with right_col:
-        st.markdown("### AI 모델 개발 도구")
+            # 소제목: 폰트 크기 조절
+        st.markdown(
+            "<p style='font-size:16px; font-weight:bold; margin-bottom:8px;'>AI 모델 개발 도구</p>",
+            unsafe_allow_html=True
+        )
+
         if st.button('➡️ Teachable Machine'):
             components.html(
                 """
