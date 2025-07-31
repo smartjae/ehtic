@@ -13,6 +13,11 @@ st.title('감정을 읽는 기계')
 # ——— Sidebar navigation menu ———
 st.sidebar.subheader('MENU')
 
+page = st.sidebar.radio(
+    '',
+    ['Home', '감정 분석 AI', '감정 분석 AI의 작동원리', '학생응답 결과']
+)
+
 # 학습 목표 박스 추가
 st.sidebar.markdown(
     """
@@ -30,10 +35,7 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-page = st.sidebar.radio(
-    '',
-    ['Home', '감정 분석 AI', '감정 분석 AI의 작동원리', '학생응답 결과']
-)
+
 
 
 # ——— Main layout: two columns (4:1) ———
