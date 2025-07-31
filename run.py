@@ -36,7 +36,8 @@ if page == 'Home':
             if thoughts.strip():
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 entry = f'[{timestamp}] {thoughts}\n'
-                with open('data.txt', 'a', encoding='utf-8') as f:답':
+                with open('data.txt', 'a', encoding='utf-8') as f:
+                    f.write(some_data)
     with left_col:
         st.subheader('Stored Student Data')
         # data.txt 내용 표시
