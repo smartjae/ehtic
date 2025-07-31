@@ -11,11 +11,30 @@ st.set_page_config(layout='wide', page_title='ethicapp')
 st.title('감정을 읽는 기계')
 
 # ——— Sidebar navigation menu ———
-st.sidebar.subheader('Menu …')
+st.sidebar.subheader('MENU')
+
+# 학습 목표 박스 추가
+st.sidebar.markdown(
+    """
+    <div style="
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    ">
+      <strong>학습 목표:</strong><br>
+      감정 분석 AI의 작동 원리를 이해하고, 직접 감정 인식 모델을 만들어 체험하여 기술의 가능성과 한계를 탐색할 수 있다.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 page = st.sidebar.radio(
     '',
-    ['Home','감정 분석 AI','감정 분석 AI의 작동원리', '학생응답 결과']
+    ['Home', '감정 분석 AI', '감정 분석 AI의 작동원리', '학생응답 결과']
 )
+
 
 # ——— Main layout: two columns (4:1) ———
 left_col, right_col = st.columns([4, 1])
