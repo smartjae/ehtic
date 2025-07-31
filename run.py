@@ -21,28 +21,31 @@ left_col, right_col = st.columns([4, 1])
 if page == 'Home':
     with left_col:
         st.subheader('Content')
-        st.video('https://youtu.be/5GN2dIu5fg4') #https://youtu.be/CShXWACuGp8?si=ANvHKLLaTQq6jU00    https://www.youtube.com/watch?v=lkT6qg55kpE
+        st.video('https://youtu.be/5GN2dIu5fg4')
 
-
-        # 폰트 크기를 키워서 안내 문구 출력
+        # — 첫 번째 질문 —
         st.markdown(
-            """
-            <p style='font-size:20px; font-weight:bold;'>기계가 감정을 읽을 수 있다고 생각하나요?</p>
-            """,
+            "<p style='font-size:18px; font-weight:bold;'>1️⃣ 기계가 사람의 감정을 인식할 수 있다면, 어떤 상황에서 도움이 될 수 있을까요?</p>",
             unsafe_allow_html=True
         )
-        thoughts = st.text_area('학생 개인 생각을 기록하세요:', height=150)
+        answer1 = st.text_area('학생들의 생각을 적어주세요:', key='answer1', height=120)
+
+        # — 두 번째 질문 —
+        st.markdown(
+            "<p style='font-size:18px; font-weight:bold;'>2️⃣ 기계가 감정을 읽을 수 있다고 생각하나요?</p>",
+            unsafe_allow_html=True
+        )
+        answer2 = st.text_area('학생들의 생각을 적어주세요:', key='answer2', height=120)
+
         if st.button('제출'):
-            if thoughts.strip():
+            if not answer1.strip() or not answer2.strip():
+                st.warning('두 질문에 모두 답변한 후 제출해주세요.')
+            else:
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                entry = f'[{timestamp}] {thoughts}\n'
+                entry = f'[{timestamp}] {answer1} | {answer2}\n'
                 with open('data.txt', 'a', encoding='utf-8') as f:
                     f.write(entry)
                 st.success('생각이 성공적으로 제출되었습니다!')
-            else:
-                st.warning('생각을 입력한 후 제출해주세요.')
-
-
 
     with right_col:
         st.subheader('Tips & Help')
