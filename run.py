@@ -12,7 +12,7 @@ st.title('감정을 읽는 기계')
 st.sidebar.subheader('Menu …')
 page = st.sidebar.radio(
     '',
-    ['Home','감정 분석 AI','감정 분석 AI의 작동원리','윤리적인 감정 분석 AI 설계안', '학생응답 결과']
+    ['Home','감정 분석 AI','감정 분석 AI의 작동원리', '학생응답 결과']
 )
 
 # ——— Main layout: two columns (4:1) ———
@@ -102,22 +102,6 @@ elif page == '감정 분석 AI':
 
 
 
-
-elif page == '윤리적인 감정 분석 AI 설계안':
-    st.markdown('### 📄 윤리적인 감정 분석 AI 설계안')
-    # Google Docs embed (preview 모드)
-    components.html(
-        """
-        <iframe
-            src="https://docs.google.com/document/d/1LpC1gVtP1BF1xMXXCLzXtU9tT5236YUGlynEHN0mce8/preview"
-            width="100%"
-            height="800"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
-        """,
-        height=820,  # iframe 높이 + 여유 공간
-    )
 
 
 
