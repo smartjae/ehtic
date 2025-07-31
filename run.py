@@ -11,11 +11,9 @@ st.set_page_config(layout='wide', page_title='ethicapp')
 st.title('감정을 읽는 기계')
 
 
-# ——— Sidebar navigation menu ———
-
-# 1) 사이드바 CSS 조정 (간격 줄이기)
+# ——— Sidebar CSS 조정 (간격 줄이기) ———
 st.sidebar.markdown(
-    
+    """
     <style>
     [data-testid="stSidebar"] h2 {
         margin-bottom: 4px;
@@ -24,11 +22,11 @@ st.sidebar.markdown(
         margin-top: 0px;
     }
     </style>
-    ,
+    """,
     unsafe_allow_html=True
 )
 
-# 2) 학습 목표 박스 (최상단)
+# ——— 학습 목표 박스 (최상단) ———
 st.sidebar.markdown(
     """
     <div style="
@@ -45,14 +43,13 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-# 3) 메뉴 서브헤더
+# ——— 메뉴 서브헤더 & 라디오 버튼 ———
 st.sidebar.subheader('MENU')
-
-# 4) 실제 페이지 선택 라디오 버튼
 page = st.sidebar.radio(
     '',
     ['Home', '감정 분석 AI', '감정 분석 AI의 작동원리', '학생응답 결과']
 )
+
 
 
 
