@@ -213,7 +213,7 @@ elif page == '감정 분석 AI의 작동원리':
     with right_col:
             # 소제목: 폰트 크기 조절
         st.markdown(
-            "<p style='font-size:25px; font-weight:bold; margin-bottom:8px;'>🔧 AI 모델 개발 도구</p>",
+            "<p style='font-size:23px; font-weight:bold; margin-bottom:8px;'>🔧 AI 모델 개발 도구</p>",
             unsafe_allow_html=True
         )
 
