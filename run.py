@@ -10,6 +10,12 @@ import re
 st.set_page_config(layout='wide', page_title='ethicapp')
 st.title('감정을 읽는 기계')
 
+
+# ——— 메뉴 헤더 (직접 HTML) ———
+st.sidebar.markdown(
+    "<h2 style='margin-bottom:4px;'>학습목표</h2>",
+    unsafe_allow_html=True
+)
 # ——— 학습 목표 박스 (최상단) ———
 st.sidebar.markdown(
     """
@@ -27,11 +33,7 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-# ——— 메뉴 헤더 (직접 HTML) ———
-st.sidebar.markdown(
-    "<h2 style='margin-bottom:4px;'>학습목표</h2>",
-    unsafe_allow_html=True
-)
+
 
 # ——— 페이지 선택 라디오 버튼 ———
 page = st.sidebar.radio(
