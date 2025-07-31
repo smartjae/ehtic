@@ -86,11 +86,11 @@ elif page == '감정 분석 AI':
         if st.session_state.get('emotion_running'):
             run_emotion_analysis()
 
-        st.subheader('학생 피드백 기록')
+        st.subheader('감정 분석 결과')
         student_name = st.text_input('학번')
         incorrect = st.text_area('잘못 인식된 감정', height=100)
         reason = st.text_area('이유', height=100)
-        if st.button('Submit Feedback'):
+        if st.button('제출'):
             if student_name.strip() and incorrect.strip() and reason.strip():
                 ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 entry = f'[{ts}] Student: {student_name} | Incorrect Analysis: {incorrect} | Reason: {reason}\n'
