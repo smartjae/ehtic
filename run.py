@@ -29,7 +29,6 @@ st.sidebar.markdown(
 )
 # ——— Sidebar navigation menu ———
 st.sidebar.subheader('MENU')
-
 page = st.sidebar.radio(
     '',
     ['Home', '감정 분석 AI', '감정 분석 AI의 작동원리', '학생응답 결과']
