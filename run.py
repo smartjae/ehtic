@@ -19,24 +19,9 @@ st.sidebar.markdown(
 )
 
 
-# ——— 사이드바 CSS: MENU 라디오 헤더 크기·볼드 조정 ———
-st.sidebar.markdown(
-    """
-    <style>
-    /* 사이드바의 첫 번째 라디오 그룹 legend를 스타일링 */
-    [data-testid="stSidebar"] .stRadio legend {
-        font-size: 18px !important;     /* 글자 크기 */
-        font-weight: bold !important;   /* 볼드 처리 */
-        margin-bottom: 4px;             /* 아래 여백 조정 */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # ——— 페이지 선택 라디오 버튼 ———
 page = st.sidebar.radio(
-    'MENU',
+    '',
     ['Home', '감정 분석 AI', '감정 분석 AI의 작동원리', '학생응답 결과']
 )
 
