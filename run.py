@@ -20,7 +20,7 @@ st.sidebar.markdown(
         margin-bottom: 10px;
         background-color: #f9f9f9;
     ">
-      <strong>학습 목표:</strong><br>
+     
       감정 분석 AI의 작동 원리를 이해하고, 직접 감정 인식 모델을 만들어 체험하여 기술의 가능성과 한계를 탐색할 수 있다.
     </div>
     """,
@@ -29,7 +29,7 @@ st.sidebar.markdown(
 
 # ——— 메뉴 헤더 (직접 HTML) ———
 st.sidebar.markdown(
-    "<h2 style='margin-bottom:4px;'>MENU</h2>",
+    "<h2 style='margin-bottom:4px;'>학습목표</h2>",
     unsafe_allow_html=True
 )
 
